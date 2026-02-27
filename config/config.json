@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "document-log-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/documentLog/DocumentLogWebPart.js",
+          "manifest": "./src/webparts/documentLog/DocumentLogWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "DocumentLogWebPartStrings": "lib/webparts/documentLog/loc/{locale}.js"
+  }
+}

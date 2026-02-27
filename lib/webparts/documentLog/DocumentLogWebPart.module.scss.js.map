@@ -1,0 +1,1 @@
+{"version":3,"file":"DocumentLogWebPart.module.scss.js","sourceRoot":"","sources":["../../../src/webparts/documentLog/DocumentLogWebPart.module.scss.ts"],"names":[],"mappings":"AACA,OAAO,CAAC,iCAAiC,CAAC,CAAC;AAC3C,IAAM,MAAM,GAAG;IACb,WAAW,EAAE,sBAAsB;IACnC,KAAK,EAAE,gBAAgB;IACvB,OAAO,EAAE,kBAAkB;IAC3B,YAAY,EAAE,uBAAuB;IACrC,KAAK,EAAE,gBAAgB;CACxB,CAAC;AAEF,eAAe,MAAM,CAAC"}

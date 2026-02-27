@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "document-log-webpart-client-side-solution",
+    "id": "1ecf6af6-a863-47c0-b644-7e60a9fdc19d",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.20.0"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "document-log-webpart description"
+      },
+      "longDescription": {
+        "default": "document-log-webpart description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "document-log-webpart Feature",
+        "description": "The feature that activates elements of the document-log-webpart solution.",
+        "id": "81585c77-db50-47fd-9e09-e74f9ead8ef2",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/document-log-webpart.sppkg"
+  }
+}

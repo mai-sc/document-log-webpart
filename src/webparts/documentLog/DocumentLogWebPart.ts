@@ -18,6 +18,14 @@ export default class DocumentLogWebPart extends BaseClientSideWebPart<IDocumentL
 
   private pollInterval: ReturnType<typeof setInterval> | null = null;
 
+  public dispose(): void {
+    if (this.tick) clearInterval(this.tick);
+    if (this.pollInterval) clearInterval(this.pollInterval);
+    this.tick = null;
+    this.pollInterval = null;
+    super.dispose();
+  }
+
   // ── Timers ──────────────────────────────────────────────────────────────
   private timers: Record<string, number> = {};
   private tick: ReturnType<typeof setInterval> | null = null;
@@ -375,7 +383,11 @@ export default class DocumentLogWebPart extends BaseClientSideWebPart<IDocumentL
 
     this.domElement.querySelector('#dl-btn-copy')!.addEventListener('click', () => {
       const code = this._el('dl-code').textContent || '';
-      navigator.clipboard.writeText(code).then(() => alert('Copied: ' + code));
+      navigator.clipboard.writeText(code)
+        .then(() => alert('Copied: ' + code))
+        .catch(() => {
+          window.prompt('Could not copy automatically. Copy the code below:', code);
+        });
     });
 
     this.domElement.querySelector('#dl-btn-print')!.addEventListener('click', () => {
@@ -531,9 +543,14 @@ export default class DocumentLogWebPart extends BaseClientSideWebPart<IDocumentL
       const data = await response.json();
       const itemId: number = data.Id;
 
+      let failedAttachments: string[] = [];
       if (attachments.length > 0) {
         this._setStatus('Uploading attachments...');
-        await this._uploadAttachments(itemId, attachments);
+        failedAttachments = await this._uploadAttachments(itemId, attachments);
+      }
+
+      if (failedAttachments.length > 0) {
+        this._showAttachmentWarning(failedAttachments);
       }
 
       this._setStatus('Waiting for reference code to be generated...');
@@ -541,38 +558,51 @@ export default class DocumentLogWebPart extends BaseClientSideWebPart<IDocumentL
 
     } catch (err) {
       console.error('DocumentLog submit error:', err);
-      this._showError();
+      this._showError('The entry could not be saved to SharePoint. Please try again or contact your administrator.');
     }
   }
 
   // ── SharePoint: upload attachments ───────────────────────────────────────
-  private async _uploadAttachments(itemId: number, files: File[]): Promise<void> {
+  private async _uploadAttachments(itemId: number, files: File[]): Promise<string[]> {
+    const failed: string[] = [];
     for (const file of files) {
-      const buffer = await file.arrayBuffer();
-      await this.context.spHttpClient.post(
-        `${this.siteUrl}/_api/web/lists/getbytitle('${this.listName}')/items(${itemId})/AttachmentFiles/add(FileName='${file.name}')`,
-        SPHttpClient.configurations.v1,
-        {
-          headers: {
-            'Accept': 'application/json;odata=nometadata',
-            'odata-version': ''
-          },
-          body: buffer
+      try {
+        const buffer = await file.arrayBuffer();
+        const response = await this.context.spHttpClient.post(
+          `${this.siteUrl}/_api/web/lists/getbytitle('${this.listName}')/items(${itemId})/AttachmentFiles/add(FileName='${encodeURIComponent(file.name)}')`,
+          SPHttpClient.configurations.v1,
+          {
+            headers: {
+              'Accept': 'application/json;odata=nometadata',
+              'odata-version': ''
+            },
+            body: buffer
+          }
+        );
+        if (!response.ok) {
+          console.error(`Attachment upload failed for "${file.name}": ${response.status}`);
+          failed.push(file.name);
         }
-      );
+      } catch (err) {
+        console.error(`Attachment upload error for "${file.name}":`, err);
+        failed.push(file.name);
+      }
     }
+    return failed;
   }
 
   // ── Poll for code written back by Power Automate ─────────────────────────
   private _pollForCode(itemId: number): void {
     let attempts = 0;
+    let consecutiveErrors = 0;
     const maxAttempts = 20;
+    const maxConsecutiveErrors = 3;
 
     this.pollInterval = setInterval(async () => {
       attempts++;
       if (attempts > maxAttempts) {
         clearInterval(this.pollInterval!);
-        this._showError();
+        this._showError('The entry was saved but the reference code was not generated in time. Please check the SharePoint list directly.');
         return;
       }
 
@@ -581,7 +611,13 @@ export default class DocumentLogWebPart extends BaseClientSideWebPart<IDocumentL
           `${this.siteUrl}/_api/web/lists/getbytitle('${this.listName}')/items(${itemId})?$select=ReferenceCode`,
           SPHttpClient.configurations.v1
         );
+
+        if (!response.ok) {
+          throw new Error(`SharePoint returned ${response.status}`);
+        }
+
         const data = await response.json();
+        consecutiveErrors = 0;
 
         if (data.ReferenceCode && data.ReferenceCode.trim() !== '') {
           clearInterval(this.pollInterval!);
@@ -591,6 +627,11 @@ export default class DocumentLogWebPart extends BaseClientSideWebPart<IDocumentL
         }
       } catch (err) {
         console.error('Poll error:', err);
+        consecutiveErrors++;
+        if (consecutiveErrors >= maxConsecutiveErrors) {
+          clearInterval(this.pollInterval!);
+          this._showError('The entry was saved but the connection was lost while waiting for the reference code. Please check the SharePoint list directly.');
+        }
       }
     }, 2000);
   }
@@ -628,11 +669,24 @@ export default class DocumentLogWebPart extends BaseClientSideWebPart<IDocumentL
     this._el('dl-success').style.display = 'block';
   }
 
-  private _showError(): void {
+  private _showError(message?: string): void {
     this.stopTick();
     this._tc('dl-tc3', '');
+    if (message) {
+      const notice = this._el('dl-error').querySelector('.dl-notice');
+      if (notice) notice.innerHTML = `✕ &nbsp;${message}`;
+    }
     this._el('dl-loading').style.display = 'none';
     this._el('dl-error').style.display = 'block';
+  }
+
+  private _showAttachmentWarning(failedFiles: string[]): void {
+    const names = failedFiles.join(', ');
+    const warning = document.createElement('div');
+    warning.className = 'dl-notice info';
+    warning.innerHTML = `⚠ &nbsp;The entry was saved, but these attachments failed to upload: <strong>${names}</strong>. You can add them manually from the SharePoint list.`;
+    const loading = this._el('dl-loading');
+    loading.parentElement!.insertBefore(warning, loading);
   }
 
   // ── Validation ───────────────────────────────────────────────────────────

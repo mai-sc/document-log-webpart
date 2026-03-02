@@ -1,0 +1,23 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+  "id": "34dd77cd-0e18-4e0f-ac99-63a69f39f688",
+  "alias": "DocumentStatusUpdateWebPart",
+  "componentType": "WebPart",
+  "version": "*",
+  "manifestVersion": 2,
+  "requiresCustomScript": false,
+  "supportedHosts": ["SharePointWebPart", "TeamsPersonalApp", "TeamsTab", "SharePointFullPage"],
+  "supportsThemeVariants": true,
+
+  "preconfiguredEntries": [{
+    "groupId": "5c03119e-3074-46fd-976b-c60198311f70",
+    "group": { "default": "Advanced" },
+    "title": { "default": "Document Status Update" },
+    "description": { "default": "Update the status of a logged document" },
+    "officeFabricIconFontName": "SyncStatus",
+    "properties": {
+      "siteUrl": "",
+      "listName": "Document Log Tracking"
+    }
+  }]
+}

@@ -9,6 +9,7 @@ export default class DocumentLogWebPart extends BaseClientSideWebPart<IDocumentL
     private get siteUrl();
     private get listName();
     private pollInterval;
+    dispose(): void;
     private timers;
     private tick;
     private fmt;
@@ -22,6 +23,7 @@ export default class DocumentLogWebPart extends BaseClientSideWebPart<IDocumentL
     private _pollForCode;
     private _showSuccess;
     private _showError;
+    private _showAttachmentWarning;
     private _validate;
     private _getFormData;
     private _el;

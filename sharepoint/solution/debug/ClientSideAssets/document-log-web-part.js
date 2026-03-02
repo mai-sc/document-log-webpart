@@ -1,4 +1,134 @@
-var __extends = (this && this.__extends) || (function () {
+define("1b6275e9-7334-428c-9f9d-d94cb03932e3_0.0.1", ["@microsoft/sp-core-library","@microsoft/sp-http","@microsoft/sp-webpart-base","@microsoft/sp-property-pane"], (__WEBPACK_EXTERNAL_MODULE__878__, __WEBPACK_EXTERNAL_MODULE__272__, __WEBPACK_EXTERNAL_MODULE__134__, __WEBPACK_EXTERNAL_MODULE__723__) => { return /******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
+/******/ 	var __webpack_modules__ = ({
+
+/***/ 878:
+/*!*********************************************!*\
+  !*** external "@microsoft/sp-core-library" ***!
+  \*********************************************/
+/***/ ((module) => {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__878__;
+
+/***/ }),
+
+/***/ 272:
+/*!*************************************!*\
+  !*** external "@microsoft/sp-http" ***!
+  \*************************************/
+/***/ ((module) => {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__272__;
+
+/***/ }),
+
+/***/ 723:
+/*!**********************************************!*\
+  !*** external "@microsoft/sp-property-pane" ***!
+  \**********************************************/
+/***/ ((module) => {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__723__;
+
+/***/ }),
+
+/***/ 134:
+/*!*********************************************!*\
+  !*** external "@microsoft/sp-webpart-base" ***!
+  \*********************************************/
+/***/ ((module) => {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE__134__;
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
+(() => {
+/*!********************************************************!*\
+  !*** ./lib/webparts/documentLog/DocumentLogWebPart.js ***!
+  \********************************************************/
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _microsoft_sp_core_library__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @microsoft/sp-core-library */ 878);
+/* harmony import */ var _microsoft_sp_core_library__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_microsoft_sp_core_library__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _microsoft_sp_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @microsoft/sp-http */ 272);
+/* harmony import */ var _microsoft_sp_http__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_microsoft_sp_http__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _microsoft_sp_webpart_base__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @microsoft/sp-webpart-base */ 134);
+/* harmony import */ var _microsoft_sp_webpart_base__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_microsoft_sp_webpart_base__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @microsoft/sp-property-pane */ 723);
+/* harmony import */ var _microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__);
+var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -13,7 +143,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -22,7 +152,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __generator = (this && this.__generator) || function (thisArg, body) {
+var __generator = (undefined && undefined.__generator) || function (thisArg, body) {
     var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
     return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
     function verb(n) { return function (v) { return step([n, v]); }; }
@@ -49,10 +179,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-import { Version } from '@microsoft/sp-core-library';
-import { SPHttpClient } from '@microsoft/sp-http';
-import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
-import { PropertyPaneTextField } from '@microsoft/sp-property-pane';
+
+
+
+
 var DocumentLogWebPart = /** @class */ (function (_super) {
     __extends(DocumentLogWebPart, _super);
     function DocumentLogWebPart() {
@@ -73,15 +203,6 @@ var DocumentLogWebPart = /** @class */ (function (_super) {
         enumerable: false,
         configurable: true
     });
-    DocumentLogWebPart.prototype.dispose = function () {
-        if (this.tick)
-            clearInterval(this.tick);
-        if (this.pollInterval)
-            clearInterval(this.pollInterval);
-        this.tick = null;
-        this.pollInterval = null;
-        _super.prototype.dispose.call(this);
-    };
     DocumentLogWebPart.prototype.fmt = function (ms) {
         if (!ms && ms !== 0)
             return '—';
@@ -197,11 +318,7 @@ var DocumentLogWebPart = /** @class */ (function (_super) {
         (_a = this.domElement.querySelector('#dl-btn-retry-new')) === null || _a === void 0 ? void 0 : _a.addEventListener('click', function () { return _this._reset(); });
         this.domElement.querySelector('#dl-btn-copy').addEventListener('click', function () {
             var code = _this._el('dl-code').textContent || '';
-            navigator.clipboard.writeText(code)
-                .then(function () { return alert('Copied: ' + code); })
-                .catch(function () {
-                window.prompt('Could not copy automatically. Copy the code below:', code);
-            });
+            navigator.clipboard.writeText(code).then(function () { return alert('Copied: ' + code); });
         });
         this.domElement.querySelector('#dl-btn-print').addEventListener('click', function () {
             var code = _this._el('dl-code').textContent || '';
@@ -223,7 +340,7 @@ var DocumentLogWebPart = /** @class */ (function (_super) {
     // ── SharePoint: create list item ─────────────────────────────────────────
     DocumentLogWebPart.prototype._submitToSharePoint = function (fd, attachments) {
         return __awaiter(this, void 0, void 0, function () {
-            var body, response, errText, data, itemId, failedAttachments, err_1;
+            var body, response, errText, data, itemId, err_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -239,7 +356,7 @@ var DocumentLogWebPart = /** @class */ (function (_super) {
                             Status: fd.status,
                             OtherRemarks: fd.remarks,
                         });
-                        return [4 /*yield*/, this.context.spHttpClient.post("".concat(this.siteUrl, "/_api/web/lists/getbytitle('").concat(this.listName, "')/items"), SPHttpClient.configurations.v1, {
+                        return [4 /*yield*/, this.context.spHttpClient.post("".concat(this.siteUrl, "/_api/web/lists/getbytitle('").concat(this.listName, "')/items"), _microsoft_sp_http__WEBPACK_IMPORTED_MODULE_1__.SPHttpClient.configurations.v1, {
                                 headers: {
                                     'Accept': 'application/json;odata=nometadata',
                                     'Content-type': 'application/json;odata=nometadata',
@@ -258,24 +375,20 @@ var DocumentLogWebPart = /** @class */ (function (_super) {
                     case 5:
                         data = _a.sent();
                         itemId = data.Id;
-                        failedAttachments = [];
                         if (!(attachments.length > 0)) return [3 /*break*/, 7];
                         this._setStatus('Uploading attachments...');
                         return [4 /*yield*/, this._uploadAttachments(itemId, attachments)];
                     case 6:
-                        failedAttachments = _a.sent();
+                        _a.sent();
                         _a.label = 7;
                     case 7:
-                        if (failedAttachments.length > 0) {
-                            this._showAttachmentWarning(failedAttachments);
-                        }
                         this._setStatus('Waiting for reference code to be generated...');
                         this._pollForCode(itemId);
                         return [3 /*break*/, 9];
                     case 8:
                         err_1 = _a.sent();
                         console.error('DocumentLog submit error:', err_1);
-                        this._showError('The entry could not be saved to SharePoint. Please try again or contact your administrator.');
+                        this._showError();
                         return [3 /*break*/, 9];
                     case 9: return [2 /*return*/];
                 }
@@ -285,45 +398,32 @@ var DocumentLogWebPart = /** @class */ (function (_super) {
     // ── SharePoint: upload attachments ───────────────────────────────────────
     DocumentLogWebPart.prototype._uploadAttachments = function (itemId, files) {
         return __awaiter(this, void 0, void 0, function () {
-            var failed, _i, files_1, file, buffer, response, err_2;
+            var _i, files_1, file, buffer;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        failed = [];
                         _i = 0, files_1 = files;
                         _a.label = 1;
                     case 1:
-                        if (!(_i < files_1.length)) return [3 /*break*/, 7];
+                        if (!(_i < files_1.length)) return [3 /*break*/, 5];
                         file = files_1[_i];
-                        _a.label = 2;
-                    case 2:
-                        _a.trys.push([2, 5, , 6]);
                         return [4 /*yield*/, file.arrayBuffer()];
-                    case 3:
+                    case 2:
                         buffer = _a.sent();
-                        return [4 /*yield*/, this.context.spHttpClient.post("".concat(this.siteUrl, "/_api/web/lists/getbytitle('").concat(this.listName, "')/items(").concat(itemId, ")/AttachmentFiles/add(FileName='").concat(encodeURIComponent(file.name), "')"), SPHttpClient.configurations.v1, {
+                        return [4 /*yield*/, this.context.spHttpClient.post("".concat(this.siteUrl, "/_api/web/lists/getbytitle('").concat(this.listName, "')/items(").concat(itemId, ")/AttachmentFiles/add(FileName='").concat(file.name, "')"), _microsoft_sp_http__WEBPACK_IMPORTED_MODULE_1__.SPHttpClient.configurations.v1, {
                                 headers: {
                                     'Accept': 'application/json;odata=nometadata',
                                     'odata-version': ''
                                 },
                                 body: buffer
                             })];
+                    case 3:
+                        _a.sent();
+                        _a.label = 4;
                     case 4:
-                        response = _a.sent();
-                        if (!response.ok) {
-                            console.error("Attachment upload failed for \"".concat(file.name, "\": ").concat(response.status));
-                            failed.push(file.name);
-                        }
-                        return [3 /*break*/, 6];
-                    case 5:
-                        err_2 = _a.sent();
-                        console.error("Attachment upload error for \"".concat(file.name, "\":"), err_2);
-                        failed.push(file.name);
-                        return [3 /*break*/, 6];
-                    case 6:
                         _i++;
                         return [3 /*break*/, 1];
-                    case 7: return [2 /*return*/, failed];
+                    case 5: return [2 /*return*/];
                 }
             });
         });
@@ -332,33 +432,27 @@ var DocumentLogWebPart = /** @class */ (function (_super) {
     DocumentLogWebPart.prototype._pollForCode = function (itemId) {
         var _this = this;
         var attempts = 0;
-        var consecutiveErrors = 0;
         var maxAttempts = 20;
-        var maxConsecutiveErrors = 3;
         this.pollInterval = setInterval(function () { return __awaiter(_this, void 0, void 0, function () {
-            var response, data, err_3;
+            var response, data, err_2;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         attempts++;
                         if (attempts > maxAttempts) {
                             clearInterval(this.pollInterval);
-                            this._showError('The entry was saved but the reference code was not generated in time. Please check the SharePoint list directly.');
+                            this._showError();
                             return [2 /*return*/];
                         }
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 4, , 5]);
-                        return [4 /*yield*/, this.context.spHttpClient.get("".concat(this.siteUrl, "/_api/web/lists/getbytitle('").concat(this.listName, "')/items(").concat(itemId, ")?$select=ReferenceCode"), SPHttpClient.configurations.v1)];
+                        return [4 /*yield*/, this.context.spHttpClient.get("".concat(this.siteUrl, "/_api/web/lists/getbytitle('").concat(this.listName, "')/items(").concat(itemId, ")?$select=ReferenceCode"), _microsoft_sp_http__WEBPACK_IMPORTED_MODULE_1__.SPHttpClient.configurations.v1)];
                     case 2:
                         response = _a.sent();
-                        if (!response.ok) {
-                            throw new Error("SharePoint returned ".concat(response.status));
-                        }
                         return [4 /*yield*/, response.json()];
                     case 3:
                         data = _a.sent();
-                        consecutiveErrors = 0;
                         if (data.ReferenceCode && data.ReferenceCode.trim() !== '') {
                             clearInterval(this.pollInterval);
                             this._showSuccess(data.ReferenceCode);
@@ -368,13 +462,8 @@ var DocumentLogWebPart = /** @class */ (function (_super) {
                         }
                         return [3 /*break*/, 5];
                     case 4:
-                        err_3 = _a.sent();
-                        console.error('Poll error:', err_3);
-                        consecutiveErrors++;
-                        if (consecutiveErrors >= maxConsecutiveErrors) {
-                            clearInterval(this.pollInterval);
-                            this._showError('The entry was saved but the connection was lost while waiting for the reference code. Please check the SharePoint list directly.');
-                        }
+                        err_2 = _a.sent();
+                        console.error('Poll error:', err_2);
                         return [3 /*break*/, 5];
                     case 5: return [2 /*return*/];
                 }
@@ -412,24 +501,11 @@ var DocumentLogWebPart = /** @class */ (function (_super) {
         this._el('dl-loading').style.display = 'none';
         this._el('dl-success').style.display = 'block';
     };
-    DocumentLogWebPart.prototype._showError = function (message) {
+    DocumentLogWebPart.prototype._showError = function () {
         this.stopTick();
         this._tc('dl-tc3', '');
-        if (message) {
-            var notice = this._el('dl-error').querySelector('.dl-notice');
-            if (notice)
-                notice.innerHTML = "\u2715 &nbsp;".concat(message);
-        }
         this._el('dl-loading').style.display = 'none';
         this._el('dl-error').style.display = 'block';
-    };
-    DocumentLogWebPart.prototype._showAttachmentWarning = function (failedFiles) {
-        var names = failedFiles.join(', ');
-        var warning = document.createElement('div');
-        warning.className = 'dl-notice info';
-        warning.innerHTML = "\u26A0 &nbsp;The entry was saved, but these attachments failed to upload: <strong>".concat(names, "</strong>. You can add them manually from the SharePoint list.");
-        var loading = this._el('dl-loading');
-        loading.parentElement.insertBefore(warning, loading);
     };
     // ── Validation ───────────────────────────────────────────────────────────
     DocumentLogWebPart.prototype._validate = function () {
@@ -526,7 +602,7 @@ var DocumentLogWebPart = /** @class */ (function (_super) {
     };
     Object.defineProperty(DocumentLogWebPart.prototype, "dataVersion", {
         get: function () {
-            return Version.parse('1.0');
+            return _microsoft_sp_core_library__WEBPACK_IMPORTED_MODULE_0__.Version.parse('1.0');
         },
         enumerable: false,
         configurable: true
@@ -540,12 +616,12 @@ var DocumentLogWebPart = /** @class */ (function (_super) {
                         {
                             groupName: 'Configuration',
                             groupFields: [
-                                PropertyPaneTextField('siteUrl', {
+                                (0,_microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__.PropertyPaneTextField)('siteUrl', {
                                     label: 'SharePoint Site URL',
                                     description: 'Leave blank to use the current site',
                                     placeholder: 'https://tenant.sharepoint.com/sites/your-site'
                                 }),
-                                PropertyPaneTextField('listName', {
+                                (0,_microsoft_sp_property_pane__WEBPACK_IMPORTED_MODULE_3__.PropertyPaneTextField)('listName', {
                                     label: 'List Name',
                                     placeholder: 'Document Log Tracking'
                                 })
@@ -557,6 +633,13 @@ var DocumentLogWebPart = /** @class */ (function (_super) {
         };
     };
     return DocumentLogWebPart;
-}(BaseClientSideWebPart));
-export default DocumentLogWebPart;
-//# sourceMappingURL=DocumentLogWebPart.js.map
+}(_microsoft_sp_webpart_base__WEBPACK_IMPORTED_MODULE_2__.BaseClientSideWebPart));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (DocumentLogWebPart);
+
+})();
+
+/******/ 	return __webpack_exports__;
+/******/ })()
+;
+});;
+//# sourceMappingURL=document-log-web-part.js.map

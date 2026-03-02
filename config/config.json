@@ -17,11 +17,20 @@
           "manifest": "./src/webparts/documentStatusUpdate/DocumentStatusUpdateWebPart.manifest.json"
         }
       ]
+    },
+    "document-timeline-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/documentTimeline/DocumentTimelineWebPart.js",
+          "manifest": "./src/webparts/documentTimeline/DocumentTimelineWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
   "localizedResources": {
     "DocumentLogWebPartStrings": "lib/webparts/documentLog/loc/{locale}.js",
-    "DocumentStatusUpdateWebPartStrings": "lib/webparts/documentStatusUpdate/loc/{locale}.js"
+    "DocumentStatusUpdateWebPartStrings": "lib/webparts/documentStatusUpdate/loc/{locale}.js",
+    "DocumentTimelineWebPartStrings": "lib/webparts/documentTimeline/loc/{locale}.js"
   }
 }

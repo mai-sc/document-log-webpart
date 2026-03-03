@@ -18,8 +18,8 @@
   "preconfiguredEntries": [{
     "groupId": "5c03119e-3074-46fd-976b-c60198311f70", // Advanced
     "group": { "default": "Advanced" },
-    "title": { "default": "document-log" },
-    "description": { "default": "document-log description" },
+    "title": { "default": "Document Log" },
+    "description": { "default": "Log a new document entry" },
     "officeFabricIconFontName": "Page",
     "properties": {
       "description": "document-log",

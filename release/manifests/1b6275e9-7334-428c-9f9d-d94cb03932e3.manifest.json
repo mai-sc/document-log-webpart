@@ -19,10 +19,10 @@
         "default": "Advanced"
       },
       "title": {
-        "default": "document-log"
+        "default": "Document Log"
       },
       "description": {
-        "default": "document-log description"
+        "default": "Log a new document entry"
       },
       "officeFabricIconFontName": "Page",
       "properties": {

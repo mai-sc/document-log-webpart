@@ -246,26 +246,57 @@ var DocumentLogWebPart = /** @class */ (function (_super) {
         var _a;
         var attachments = [];
         var attachArea = this.domElement.querySelector('#dl-attach-area');
+        var attachList = this.domElement.querySelector('#dl-attach-list');
         var fileInput = document.createElement('input');
         fileInput.type = 'file';
         fileInput.multiple = true;
         fileInput.style.display = 'none';
-        attachArea.appendChild(fileInput);
-        attachArea.addEventListener('click', function () { return fileInput.click(); });
+        this.domElement.appendChild(fileInput);
+        attachArea.addEventListener('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            fileInput.click();
+        });
         fileInput.addEventListener('change', function () {
             Array.from(fileInput.files || []).forEach(function (f) {
                 if (!attachments.find(function (a) { return a.name === f.name; }))
                     attachments.push(f);
             });
+            fileInput.value = '';
             renderAttachments();
         });
+        attachArea.addEventListener('dragover', function (e) {
+            e.preventDefault();
+            attachArea.style.borderColor = '#8b4513';
+        });
+        attachArea.addEventListener('dragleave', function () {
+            attachArea.style.borderColor = '#b0a898';
+        });
+        attachArea.addEventListener('drop', function (e) {
+            e.preventDefault();
+            attachArea.style.borderColor = '#b0a898';
+            var files = e.dataTransfer ? e.dataTransfer.files : null;
+            if (files) {
+                Array.from(files).forEach(function (f) {
+                    if (!attachments.find(function (a) { return a.name === f.name; }))
+                        attachments.push(f);
+                });
+                renderAttachments();
+            }
+        });
         var renderAttachments = function () {
-            var list = _this.domElement.querySelector('#dl-attach-list');
-            list.innerHTML = attachments.map(function (f) {
-                return "<div class=\"dl-attach-item\">\n          <span>\uD83D\uDCCE ".concat(f.name, "</span>\n          <button data-name=\"").concat(f.name, "\">\u2715 remove</button>\n        </div>");
+            if (attachments.length === 0) {
+                attachArea.innerHTML = '<div class="dl-attach-label">Drop files here or <span>browse</span></div>';
+                attachList.innerHTML = '';
+                return;
+            }
+            attachArea.innerHTML = "<div class=\"dl-attach-label\"><span>".concat(attachments.length, " file").concat(attachments.length > 1 ? 's' : '', " attached</span> \u2014 click to add more</div>");
+            attachList.innerHTML = attachments.map(function (f, i) {
+                return "<div class=\"dl-attach-item\">\n          <span>".concat(i + 1, ". ").concat(f.name, "</span>\n          <button data-name=\"").concat(f.name, "\">\u2715 remove</button>\n        </div>");
             }).join('');
-            list.querySelectorAll('button').forEach(function (btn) {
-                btn.addEventListener('click', function () {
+            attachList.querySelectorAll('button').forEach(function (btn) {
+                btn.addEventListener('click', function (e) {
+                    e.stopPropagation();
                     attachments = attachments.filter(function (a) { return a.name !== btn.getAttribute('data-name'); });
                     renderAttachments();
                 });
@@ -415,7 +446,7 @@ var DocumentLogWebPart = /** @class */ (function (_super) {
     // ── SharePoint: upload attachments ───────────────────────────────────────
     DocumentLogWebPart.prototype._uploadAttachments = function (itemId, files) {
         return __awaiter(this, void 0, void 0, function () {
-            var failed, _i, files_1, file, buffer, response, err_2;
+            var failed, _i, files_1, file, buffer, encodedName, response, err_2;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -431,9 +462,11 @@ var DocumentLogWebPart = /** @class */ (function (_super) {
                         return [4 /*yield*/, file.arrayBuffer()];
                     case 3:
                         buffer = _a.sent();
-                        return [4 /*yield*/, this.context.spHttpClient.post("".concat(this.siteUrl, "/_api/web/lists/getbytitle('").concat(this.listName, "')/items(").concat(itemId, ")/AttachmentFiles/add(FileName='").concat(encodeURIComponent(file.name), "')"), _microsoft_sp_http__WEBPACK_IMPORTED_MODULE_1__.SPHttpClient.configurations.v1, {
+                        encodedName = encodeURIComponent(file.name.replace(/'/g, "''"));
+                        return [4 /*yield*/, this.context.spHttpClient.post("".concat(this.siteUrl, "/_api/web/lists/getbytitle('").concat(this.listName, "')/items(").concat(itemId, ")/AttachmentFiles/add(FileName='").concat(encodedName, "')"), _microsoft_sp_http__WEBPACK_IMPORTED_MODULE_1__.SPHttpClient.configurations.v1, {
                                 headers: {
                                     'Accept': 'application/json;odata=nometadata',
+                                    'Content-Type': 'application/octet-stream',
                                     'odata-version': ''
                                 },
                                 body: buffer

@@ -290,29 +290,59 @@ export default class DocumentLogWebPart extends BaseClientSideWebPart<IDocumentL
     let attachments: File[] = [];
 
     const attachArea = this.domElement.querySelector('#dl-attach-area') as HTMLElement;
+    const attachList = this.domElement.querySelector('#dl-attach-list') as HTMLElement;
     const fileInput = document.createElement('input');
     fileInput.type = 'file';
     fileInput.multiple = true;
     fileInput.style.display = 'none';
-    attachArea.appendChild(fileInput);
-    attachArea.addEventListener('click', () => fileInput.click());
+    this.domElement.appendChild(fileInput);
+    attachArea.addEventListener('click', (e: Event) => {
+      e.preventDefault();
+      e.stopPropagation();
+      fileInput.click();
+    });
     fileInput.addEventListener('change', () => {
       Array.from(fileInput.files || []).forEach((f: File) => {
         if (!attachments.find((a: File) => a.name === f.name)) attachments.push(f);
       });
+      fileInput.value = '';
       renderAttachments();
+    });
+    attachArea.addEventListener('dragover', (e: DragEvent) => {
+      e.preventDefault();
+      attachArea.style.borderColor = '#8b4513';
+    });
+    attachArea.addEventListener('dragleave', () => {
+      attachArea.style.borderColor = '#b0a898';
+    });
+    attachArea.addEventListener('drop', (e: DragEvent) => {
+      e.preventDefault();
+      attachArea.style.borderColor = '#b0a898';
+      const files = e.dataTransfer ? e.dataTransfer.files : null;
+      if (files) {
+        Array.from(files).forEach((f: File) => {
+          if (!attachments.find((a: File) => a.name === f.name)) attachments.push(f);
+        });
+        renderAttachments();
+      }
     });
 
     const renderAttachments = (): void => {
-      const list = this.domElement.querySelector('#dl-attach-list') as HTMLElement;
-      list.innerHTML = attachments.map((f: File) =>
+      if (attachments.length === 0) {
+        attachArea.innerHTML = '<div class="dl-attach-label">Drop files here or <span>browse</span></div>';
+        attachList.innerHTML = '';
+        return;
+      }
+      attachArea.innerHTML = `<div class="dl-attach-label"><span>${attachments.length} file${attachments.length > 1 ? 's' : ''} attached</span> — click to add more</div>`;
+      attachList.innerHTML = attachments.map((f: File, i: number) =>
         `<div class="dl-attach-item">
-          <span>📎 ${f.name}</span>
+          <span>${i + 1}. ${f.name}</span>
           <button data-name="${f.name}">✕ remove</button>
         </div>`
       ).join('');
-      list.querySelectorAll('button').forEach(btn => {
-        btn.addEventListener('click', () => {
+      attachList.querySelectorAll('button').forEach(btn => {
+        btn.addEventListener('click', (e: Event) => {
+          e.stopPropagation();
           attachments = attachments.filter((a: File) => a.name !== btn.getAttribute('data-name'));
           renderAttachments();
         });
@@ -568,12 +598,14 @@ export default class DocumentLogWebPart extends BaseClientSideWebPart<IDocumentL
     for (const file of files) {
       try {
         const buffer = await file.arrayBuffer();
+        const encodedName = encodeURIComponent(file.name.replace(/'/g, "''"));
         const response = await this.context.spHttpClient.post(
-          `${this.siteUrl}/_api/web/lists/getbytitle('${this.listName}')/items(${itemId})/AttachmentFiles/add(FileName='${encodeURIComponent(file.name)}')`,
+          `${this.siteUrl}/_api/web/lists/getbytitle('${this.listName}')/items(${itemId})/AttachmentFiles/add(FileName='${encodedName}')`,
           SPHttpClient.configurations.v1,
           {
             headers: {
               'Accept': 'application/json;odata=nometadata',
+              'Content-Type': 'application/octet-stream',
               'odata-version': ''
             },
             body: buffer

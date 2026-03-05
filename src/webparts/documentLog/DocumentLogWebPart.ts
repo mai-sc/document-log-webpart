@@ -197,8 +197,8 @@ export default class DocumentLogWebPart extends BaseClientSideWebPart<IDocumentL
                 <select id="dl-status" class="dl-select">
                   <option value="">— Select —</option>
                   <option>Received</option>
-                  <option>For Internal Review</option>
-                  <option>DCA Review</option>
+                  <option>In Progress</option>
+                  <option>For DCA Approval and Signature</option>
                   <option>Released</option>
                   <option>Filed</option>
                 </select>
@@ -503,11 +503,11 @@ export default class DocumentLogWebPart extends BaseClientSideWebPart<IDocumentL
   <tr><td class="chk">☐</td><td>Drafting Memo</td><td>Atty. Amy | Atty. Unis | Atty. Kerr | Atty. Jen</td><td></td><td></td></tr>
   <tr><td class="chk">☐</td><td>For DCA Review</td><td>DCA</td><td></td><td></td></tr>
   <tr><td class="chk">☐</td><td>For Revisions</td><td>Atty. Amy | Atty. Unis | Atty. Kerr | Atty. Jen</td><td></td><td></td></tr>
-  <tr><td class="chk">☐</td><td>Tracking - DCA Review</td><td>Nante</td><td></td><td></td></tr>
   <tr><td class="chk">☐</td><td>For Printing</td><td>Roda</td><td></td><td></td></tr>
+  <tr><td class="chk">☐</td><td>Tracking - For DCA Approval and Signature</td><td>DCA</td><td></td><td></td></tr>
   <tr class="sec"><td colspan="5">Approval and Release</td></tr>
   <tr><td class="chk">☐</td><td>For DCA Signature</td><td>DCA</td><td></td><td></td></tr>
-  <tr><td class="chk">☐</td><td>Tracking - Released</td><td>Nante</td><td></td><td></td></tr>
+  <tr><td class="chk">☐</td><td>Tracking - Released</td><td>Nante | Dyane</td><td></td><td></td></tr>
   <tr><td class="chk">☐</td><td>Sorting</td><td>Roda</td><td></td><td></td></tr>
   <tr class="sec"><td colspan="5">For Physical/Hardcopy</td></tr>
   <tr><td class="chk">☐</td><td>Log Outgoing</td><td>Roda</td><td></td><td></td></tr>

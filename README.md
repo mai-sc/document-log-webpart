@@ -47,7 +47,7 @@ Primary list for document entries.
 | Document Type | Document_x0020_Type | Choice (RCM, MISC) |
 | Document Format | Document_x0020_Format | Choice (HC, SC) |
 | From | From | Text |
-| Status | Status | Choice (Received, For Internal Review, DCA Review, Released, Filed) |
+| Status | Status | Choice (Received, In Progress, For DCA Approval and Signature, Released, Filed) |
 | Other Remarks | OtherRemarks | Text |
 
 ### Document Status Log
@@ -85,6 +85,12 @@ gulp serve
 ```
 
 This launches the SharePoint Workbench where you can add and test the web parts. You'll need to configure the site URL in each web part's property pane to point to a SharePoint site with the required lists.
+
+In some cases, you need to install a developer trust certificate.
+
+```bash
+gulp trust-dev-cert
+```
 
 ## Build and Package
 

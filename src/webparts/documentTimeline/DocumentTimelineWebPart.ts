@@ -360,8 +360,8 @@ export default class DocumentTimelineWebPart extends BaseClientSideWebPart<IDocu
     let cls = '';
     switch (status) {
       case 'Received': cls = 'st-received'; break;
-      case 'For Internal Review': cls = 'st-review'; break;
-      case 'DCA Review': cls = 'st-dca'; break;
+      case 'In Progress': cls = 'st-review'; break;
+      case 'For DCA Approval and Signature': cls = 'st-dca'; break;
       case 'Released': cls = 'st-released'; break;
       case 'Filed': cls = 'st-filed'; break;
     }

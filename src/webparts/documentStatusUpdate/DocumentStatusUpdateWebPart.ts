@@ -125,8 +125,8 @@ export default class DocumentStatusUpdateWebPart extends BaseClientSideWebPart<I
               <label class="dsu-label">Status <span class="req">*</span></label>
               <select id="dsu-status" class="dsu-select">
                 <option value="Received">Received</option>
-                <option value="For Internal Review">For Internal Review</option>
-                <option value="DCA Review">DCA Review</option>
+                <option value="In Progress">In Progress</option>
+                <option value="For DCA Approval and Signature">For DCA Approval and Signature</option>
                 <option value="Released">Released</option>
                 <option value="Filed">Filed</option>
               </select>
@@ -380,8 +380,8 @@ export default class DocumentStatusUpdateWebPart extends BaseClientSideWebPart<I
     let cls = '';
     switch (status) {
       case 'Received': cls = 'st-received'; break;
-      case 'For Internal Review': cls = 'st-review'; break;
-      case 'DCA Review': cls = 'st-dca'; break;
+      case 'In Progress': cls = 'st-review'; break;
+      case 'For DCA Approval and Signature': cls = 'st-dca'; break;
       case 'Released': cls = 'st-released'; break;
       case 'Filed': cls = 'st-filed'; break;
     }

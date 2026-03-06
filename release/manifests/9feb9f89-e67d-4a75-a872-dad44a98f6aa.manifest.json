@@ -40,7 +40,7 @@
     "scriptResources": {
       "document-timeline-web-part": {
         "type": "path",
-        "path": "document-timeline-web-part.js"
+        "path": "document-timeline-web-part_aa195feb3de42aee60c7.js"
       },
       "@microsoft/sp-core-library": {
         "type": "component",

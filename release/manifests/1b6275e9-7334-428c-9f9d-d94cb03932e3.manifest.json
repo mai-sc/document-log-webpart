@@ -40,7 +40,7 @@
     "scriptResources": {
       "document-log-web-part": {
         "type": "path",
-        "path": "document-log-web-part.js"
+        "path": "document-log-web-part_8f07b055cd580ca3d820.js"
       },
       "@microsoft/sp-core-library": {
         "type": "component",

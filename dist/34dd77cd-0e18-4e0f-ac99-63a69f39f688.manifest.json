@@ -39,7 +39,7 @@
     "scriptResources": {
       "document-status-update-web-part": {
         "type": "path",
-        "path": "document-status-update-web-part.js"
+        "path": "document-status-update-web-part_a20416dbd08d1e8ef41f.js"
       },
       "@microsoft/sp-core-library": {
         "type": "component",

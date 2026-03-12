@@ -510,6 +510,7 @@ export default class DocumentLogWebPart extends BaseClientSideWebPart<IDocumentL
   <tr><td class="chk">☐</td><td>Tracking - Released</td><td>Nante | Dyane</td><td></td><td></td></tr>
   <tr><td class="chk">☐</td><td>Sorting</td><td>Roda</td><td></td><td></td></tr>
   <tr class="sec"><td colspan="5">For Physical/Hardcopy</td></tr>
+  <tr><td class="chk">☐</td><td>Scanning Document</td><td>Beau | Dyane</td><td></td><td></td></tr>
   <tr><td class="chk">☐</td><td>Log Outgoing</td><td>Roda</td><td></td><td></td></tr>
   <tr><td class="chk">☐</td><td>For Dispatch</td><td>Irish | Jim</td><td></td><td></td></tr>
   <tr class="sec"><td colspan="5">For Email</td></tr>

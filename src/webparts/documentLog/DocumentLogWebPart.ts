@@ -172,7 +172,7 @@ export default class DocumentLogWebPart extends BaseClientSideWebPart<IDocumentL
                 <select id="dl-type" class="dl-select">
                   <option value="">— Select —</option>
                   <option value="RCM">RCM</option>
-                  <option value="MISC">MISC</option>
+                  <option value="OTHERS">OTHERS</option>
                 </select>
                 <div class="dl-val" id="dl-v-type">Please select a document type.</div>
               </div>
